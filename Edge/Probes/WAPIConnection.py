@@ -2,9 +2,7 @@ import requests
 from datetime import datetime
 import collections
 import json
-from types import SimpleNamespace
 
-# import time
 
 class WAPIConnection:
     def __init__(self, apiKEY, cityID):
@@ -77,7 +75,7 @@ class WAPIConnection:
     ]  }
                 
     @classmethod
-    def fromResource(cls,res):
+    def fromResource(cls,res): #TODO: Alterar o json de entrada
         #return cls(**res) - Se os atributos tiverem as mesmas chaves
         resource = json.loads(res)
         cls.method = resource['method']
@@ -87,10 +85,7 @@ class WAPIConnection:
         return getattr(self,self.method)()
         
     def getWeatherData(self):
-        # Weather
         weather_url = 'http://api.openweathermap.org/data/2.5/weather?appid={key}&units=metric&id={cityid}'.format(key=self.apiKey.rstrip(), cityid=self.cityId.rstrip())
-        #_____key=b69a070b24b22a56167f8fac1ab8debf
-        #_____city=2740636
         jsonData = requests.get(weather_url).json()
         chaves = jsonData.keys()
         valores = jsonData.values()
