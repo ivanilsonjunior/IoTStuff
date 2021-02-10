@@ -5,6 +5,12 @@ import json
 
 
 class WAPIConnection:
+    '''
+    Classe para recuperar dados de clima do OpenWeatherMap
+    Attributes:
+            apiKEY (str): OpenWeatherMap API key
+            cityId(srt): Target City Id
+    '''
     def __init__(self, apiKEY, cityID):
         self.apiKey = apiKEY
         self.cityId = cityID

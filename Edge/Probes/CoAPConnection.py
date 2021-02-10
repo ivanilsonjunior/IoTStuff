@@ -5,12 +5,24 @@ import json
 logging.basicConfig(level=logging.INFO)
 
 class CoAPConnection:
+    '''
+    Classe para recuperar dados de um sensor que utilize CoAP.
+
+    Attributes:
+            host (str): Sensor Hostname
+            resource(srt): remote CoAP resource
+    '''
     def __init__(self,host,resource):
         self.host = host
         self.resource = resource
     
     @classmethod
     def fromResource(cls,res):
+        '''
+        Instancia um objeto a partir de um Json
+            Parameters:
+                res (str): Json
+        '''
         return cls(**json.loads(res))
 
     def getResource(self):

@@ -1,2 +1,3 @@
-Edge/Probes/__pycache__/CoAPConnection.cpython-39.pyc
-__pycache__/EdgeApp.cpython-39.pyc
+__pycache__/*
+*.pyc
+*.db
