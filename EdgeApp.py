@@ -96,6 +96,10 @@ class Puppeteer():
         Session = sessionmaker(bind = self.engine)
         self.session = Session()
         self.meta = MetaData()
+        if self.meta.is_bound():
+            print("Ecziste")
+        else:
+            print("Non Ecziste")
         self.meta.create_all(self.engine)
         Base.metadata.create_all(self.engine)
 
@@ -123,38 +127,3 @@ class Puppeteer():
 
     def  getProbeRawDataAvgByInterval(self,probe,start,end):
         return self.session.query(func.avg(RawData.data)).filter(RawData.probe == probe).filter(RawData.timestamp.between(start,end)).one()
-    
-
-
-#Session = sessionmaker(bind = engine)
-#session = Session()
-#result = session.query(Locations).all()
-
-#for location in result:
-#    print (location) 
-#    for sensor in location.sensors:
-#        print ("\t" + str(sensor))
-
-
-# probe = session.query(Probes).filter_by(run=True).first()
-#dei = session.query(Locations).filter_by(name='dei').first()
-#print(dei)
-#teste = Locations(name="DEEC")
-#session.add(teste)
-#session.commit()
-
-
-
-
-#data = RawData()
-#data.probe = probinho
-#data.timestamp = datetime.now()
-#data.data =  11.1
-#session.add(data)
-#session.commit()
-
-
-
-# from sqlalchemy import func
-#  med = session.query(func.avg(RawData.data)).filter(RawData.probe == probe).one()
-# session.query(func.avg(RawData.data)).filter(RawData.probe == probe).filter(RawData.timestamp.between('2021-01-22','2021-01-23')).one()
