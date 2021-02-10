@@ -96,12 +96,12 @@ class Puppeteer():
         Session = sessionmaker(bind = self.engine)
         self.session = Session()
         self.meta = MetaData()
-        if self.meta.is_bound():
-            print("Ecziste")
-        else:
-            print("Non Ecziste")
+        #if self.meta.is_bound():
+        #    print("Ecziste")
+        #else:
+        #    print("Non Ecziste")
         self.meta.create_all(self.engine)
-        Base.metadata.create_all(self.engine)
+        #Base.metadata.create_all(self.engine)
 
 
     def addLocation(self, newName):
