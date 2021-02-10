@@ -11,7 +11,7 @@ class CoAPConnection:
     
     @classmethod
     def fromResource(cls,res):
-        return cls(**json.loads(res))# - Se os atributos tiverem as mesmas chaves
+        return cls(**json.loads(res))
 
     def getResource(self):
         return self.getCoAPFloat()
@@ -26,16 +26,6 @@ class CoAPConnection:
             print(e)
         else:
             return float(response.payload)
-#            print('Result: %s\n%r'%(response.code, response.payload))
 
     def getCoAPFloat(self):
         return float(asyncio.get_event_loop().run_until_complete(self.getRawCoAP()))
-#async def main():
-#EdgeApp = getCoAP('localhost','/Sensing/Temp')
-
-#if __name__ == "__main__":
-#EdgeApp = asyncio.get_event_loop().run_until_complete(getCoAP('localhost','Sensing/Temp'))
-
-#conn = CoAPConnection('localhost','Sensing/Temp')
-
-#print (conn.getCoAPFloat())
