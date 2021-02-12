@@ -15,6 +15,12 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import func
 
 class Locations(Base):
+    '''
+        Class Location, registra a localização
+        Attributes: 
+            name (str): Nome da localização
+            sensers (str): Lista de sensores do local
+    '''
     __tablename__ = 'locations'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
@@ -22,6 +28,14 @@ class Locations(Base):
         return str(self.name + " has " + str(len(self.sensors)) + " sensors")
 
 class Sensors(Base):
+    '''
+        Class Sensores, um sensor é uma entidade que disponiliza as informações.
+        Attributes:
+            name (str): Nome do sensor
+            hostname (str): Hostname do sensor
+            active (bool): Seus dados devem ser coletados?
+            location (Locations): Localização do sensor
+    '''
     __tablename__ = 'sensors'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
@@ -34,6 +48,17 @@ class Sensors(Base):
 
 
 class Probes(Base):
+    '''
+        Class Probes, um probe é a entidade responsavel por recuperar o dado do sensor.
+        Attributes:
+            name (str): Nome do probe
+            cronMinute (int): Minutos que a coleta deve ser feita (now().minute % cronMinute == 0)
+            resource (Json): Recuurso a ser recuperado, atualmente é utilizando um Json para instanciar a tecnologia de comunicação (Edge.Probes.*)
+            run (str): Este probe deve coletar?
+            datatype (Datatypes): Tipo de dado que o probe coleta
+            commtype (Commtypes): Tipo de comunicação que o probe aceita
+            sensor (Sensors): Sensor a quem o probe pertence
+    '''
     __tablename__ = 'probes'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
