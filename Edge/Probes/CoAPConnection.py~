@@ -13,10 +13,10 @@ class CoAPConnection:
             resource(srt): remote CoAP resource
     '''
 
-    def getResource(self, **kwargs):
+    def getResource(self, kwargs):
         return self.getCoAPFloat(kwargs)
 
-    async def getRawCoAP(self, **kwargs):
+    async def getRawCoAP(self):
         protocol = await Context.create_client_context()
         request = Message(code=GET,
                     uri=f'coap://{kwargs["host"]}/kwargs["resource"]'
@@ -28,5 +28,5 @@ class CoAPConnection:
         else:
             return float(response.payload)
 
-    def getCoAPFloat(self, **kwargs):
-        return float(asyncio.get_event_loop().run_until_complete(self.getRawCoAP(kwargs)))
+    def getCoAPFloat(self):
+        return float(asyncio.get_event_loop().run_until_complete(self.getRawCoAP()))
